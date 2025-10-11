@@ -31,6 +31,11 @@ const Game = () => {
     setLetterStates({});
   };
 
+  const handleGiveUp = () => {
+    setGameStatus('gaveup');
+    setCurrentGuess('');
+  };
+
   const evaluateGuess = (guess) => {
     const result = [];
     const targetLetters = targetWord.split('');
