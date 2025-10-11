@@ -3,7 +3,7 @@ import GameBoard from '../components/GameBoard';
 import Keyboard from '../components/Keyboard';
 import GameModal from '../components/GameModal';
 import { getRandomWord, isValidWord } from '../data/mock';
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, Flag } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useToast } from '../hooks/use-toast';
 
@@ -14,7 +14,7 @@ const Game = () => {
   const [targetWord, setTargetWord] = useState('');
   const [guesses, setGuesses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState('');
-  const [gameStatus, setGameStatus] = useState('playing'); // playing, won, lost
+  const [gameStatus, setGameStatus] = useState('playing'); // playing, won, lost, gaveup
   const [letterStates, setLetterStates] = useState({}); // correct, present, absent
   const { toast } = useToast();
 
