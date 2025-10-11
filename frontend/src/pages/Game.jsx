@@ -156,14 +156,25 @@ const Game = () => {
       <header className="relative z-10 border-b border-green-900 bg-black/80 backdrop-blur-sm">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-3xl font-bold tracking-wider matrix-glow">CS WORDLE</h1>
-          <Button
-            onClick={startNewGame}
-            variant="outline"
-            className="border-green-500 text-green-400 hover:bg-green-950 hover:text-green-300"
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            New Game
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              onClick={handleGiveUp}
+              variant="outline"
+              disabled={gameStatus !== 'playing'}
+              className="border-red-500 text-red-400 hover:bg-red-950 hover:text-red-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Flag className="mr-2 h-4 w-4" />
+              Give Up
+            </Button>
+            <Button
+              onClick={startNewGame}
+              variant="outline"
+              className="border-green-500 text-green-400 hover:bg-green-950 hover:text-green-300"
+            >
+              <RotateCcw className="mr-2 h-4 w-4" />
+              New Game
+            </Button>
+          </div>
         </div>
       </header>
 
