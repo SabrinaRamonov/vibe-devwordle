@@ -8,32 +8,56 @@ import {
   DialogTitle,
 } from './ui/dialog';
 import { Button } from './ui/button';
-import { Trophy, XCircle } from 'lucide-react';
+import { Trophy, XCircle, Flag } from 'lucide-react';
 
 const GameModal = ({ isOpen, gameStatus, targetWord, guesses, onPlayAgain }) => {
   const isWon = gameStatus === 'won';
+  const gaveUp = gameStatus === 'gaveup';
+
+  const getTitle = () => {
+    if (isWon) {
+      return (
+        <>
+          <Trophy className="h-6 w-6 text-yellow-400" />
+          ACCESS GRANTED
+        </>
+      );
+    } else if (gaveUp) {
+      return (
+        <>
+          <Flag className="h-6 w-6 text-orange-400" />
+          SURRENDERED
+        </>
+      );
+    } else {
+      return (
+        <>
+          <XCircle className="h-6 w-6 text-red-400" />
+          ACCESS DENIED
+        </>
+      );
+    }
+  };
+
+  const getDescription = () => {
+    if (isWon) {
+      return `You cracked the code in ${guesses} ${guesses === 1 ? 'attempt' : 'attempts'}!`;
+    } else if (gaveUp) {
+      return `Better luck next time! You gave up after ${guesses} ${guesses === 1 ? 'attempt' : 'attempts'}.`;
+    } else {
+      return `Game over! The word was: ${targetWord}`;
+    }
+  };
 
   return (
     <Dialog open={isOpen}>
       <DialogContent className="bg-black border-2 border-green-500 text-green-400 matrix-glow">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl text-green-400">
-            {isWon ? (
-              <>
-                <Trophy className="h-6 w-6 text-yellow-400" />
-                ACCESS GRANTED
-              </>
-            ) : (
-              <>
-                <XCircle className="h-6 w-6 text-red-400" />
-                ACCESS DENIED
-              </>
-            )}
+            {getTitle()}
           </DialogTitle>
           <DialogDescription className="text-green-300">
-            {isWon
-              ? `You cracked the code in ${guesses} ${guesses === 1 ? 'attempt' : 'attempts'}!`
-              : `The word was: ${targetWord}`}
+            {getDescription()}
           </DialogDescription>
         </DialogHeader>
 
